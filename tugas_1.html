@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Biodata</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    table { border-collapse: collapse; }
+    .page { width: 100%; max-width: 1100px; margin: 0 auto; background: #fff; }
+    .section { border-bottom: 2px solid #999; }
+
+    /* Section 1 - Menu */
+    .menu td { padding: 14px 20px; background: #eee; }
+    .brand { font-weight: bold; font-size: 18px; }
+    .menu a { margin-left: 18px; color: #333; text-decoration: none; font-size: 14px; }
+    .menu a:hover { text-decoration: underline; }
+
+    /* Section 2 - Header */
+    .hero td { padding: 30px 20px; vertical-align: top; }
+    .hero h1 { margin: 0 0 10px; font-size: 26px; }
+    .hero p { margin: 0 0 16px; color: #555; line-height: 1.5; }
+    .btn {
+      display: inline-block; padding: 8px 16px; background: #ddd;
+      border: 1px solid #aaa; color: #222; text-decoration: none; font-size: 14px;
+    }
+    .hero-img {
+      width: 100%; height: 260px; background: #ccc; color: #888;
+      text-align: center; vertical-align: middle; font-size: 22px;
+    }
+
+    /* Section 3 - About / Biodata */
+    .title { text-align: center; padding: 30px 20px 4px; }
+    .title h2 { margin: 0; font-size: 24px; }
+    .subtitle { text-align: center; color: #777; font-style: italic; font-size: 14px; padding-bottom: 20px; }
+    .bio { width: 100%; border-spacing: 12px; border-collapse: separate; padding: 0 8px 20px; }
+    .bio td {
+      width: 33.33%; background: #eee; border: 1px solid #ddd;
+      padding: 14px; text-align: center; vertical-align: top;
+    }
+    .bio .label { font-size: 13px; color: #666; margin-bottom: 6px; }
+    .bio .value { font-weight: bold; font-size: 15px; }
+
+    /* Section 4 - Portfolio */
+    .porto { width: 100%; border-spacing: 16px; border-collapse: separate; padding: 0 4px 24px; }
+    .porto > tbody > tr > td {
+      width: 33.33%; border: 2px solid #bbb; padding: 8px; vertical-align: top;
+    }
+    .thumb {
+      height: 200px; background: #ccc; color: #888; text-align: center;
+      font-size: 22px; line-height: 200px;
+    }
+    .porto h3 { margin: 10px 0 4px; font-size: 15px; text-align: center; }
+    .porto p { margin: 0 0 6px; font-size: 13px; color: #555; text-align: center; }
+
+    footer { text-align: center; padding: 16px; font-size: 13px; color: #777; background: #eee; }
+  </style>
+</head>
+<body>
+
+<table class="page">
+  <!-- SECTION 1: MENU -->
+  <tr>
+    <td class="section">
+      <table class="menu" width="100%">
+        <tr>
+          <td class="brand">Brand</td>
+          <td align="right">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#portfolio">Portofolio</a>
+            <a href="#contact">Contact</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- SECTION 2: JUDUL KIRI, GAMBAR KANAN -->
+  <tr id="home">
+    <td class="section">
+      <table class="hero" width="100%">
+        <tr>
+          <td width="50%">
+            <h1>Selamat Datang di Website Saya</h1>
+            <p>Halo! Saya Wira Dirgantara. Ini adalah halaman profil biodata saya.
+               Kolom kiri berisi teks sambutan, dan kolom kanan berisi gambar.</p>
+            <a class="btn" href="#about">Pelajari Lebih Lanjut</a>
+          </td>
+          <td width="50%">
+            <table width="100%">
+              <tr>
+                <td class="hero-img">
+                  <!-- Ganti dengan foto kamu: <img src="foto.jpg" width="100%"> -->
+                  Foto Profil
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- SECTION 3: BIODATA 6 BOX -->
+  <tr id="about">
+    <td class="section">
+      <table width="100%">
+        <tr><td class="title"><h2>About Me</h2></td></tr>
+        <tr><td class="subtitle">A brief introduction about myself</td></tr>
+        <tr>
+          <td>
+            <table class="bio">
+              <tr>
+                <td><div class="label">Full Name</div><div class="value">Wira Dirgantara</div></td>
+                <td><div class="label">Education</div><div class="value">S1 Teknik Informatika</div></td>
+                <td><div class="label">Pekerjaan</div><div class="value">Esco Lifesciences</div></td>
+              </tr>
+              <tr id="contact">
+                <td><div class="label">Contact</div><div class="value">wira@email.com</div></td>
+                <td><div class="label">Hobi</div><div class="value">Coding &amp; Membaca</div></td>
+                <td><div class="label">Alamat</div><div class="value">Jakarta, Indonesia</div></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- SECTION 4: PORTOFOLIO -->
+  <tr id="portfolio">
+    <td class="section">
+      <table width="100%">
+        <tr><td class="title" style="padding-bottom:10px"><h2>Portofolio</h2></td></tr>
+        <tr>
+          <td>
+            <table class="porto">
+              <tr>
+                <td>
+                  <div class="thumb">350 x 200</div>
+                  <h3>Proyek 1</h3>
+                  <p>Deskripsi proyek 1.</p>
+                </td>
+                <td>
+                  <div class="thumb">350 x 200</div>
+                  <h3>Proyek 2</h3>
+                  <p>Deskripsi proyek 2.</p>
+                </td>
+                <td>
+                  <div class="thumb">350 x 200</div>
+                  <h3>Proyek 3</h3>
+                  <p>Deskripsi proyek 3.</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td><footer>&copy; 2026 Wira Dirgantara. All rights reserved.</footer></td>
+  </tr>
+</table>
+
+</body>
+</html>
