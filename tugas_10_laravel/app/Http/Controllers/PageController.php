@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+
 class PageController extends Controller
 {
+    // Halaman utama: tampilkan 3 produk terbaru
     public function home()
     {
-        return view('pages.home');
+        $products = Product::latest()->take(3)->get();
+
+        return view('pages.home', compact('products'));
     }
 
     public function about()
