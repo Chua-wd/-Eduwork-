@@ -1,13 +1,18 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+// Halaman (PageController)
+Route::get('/', [PageController::class, 'home']);
+Route::get('/about', [PageController::class, 'about']);
+Route::get('/contact', [PageController::class, 'contact']);
 
-Route::get('/products', [ProductController::class, 'index']);
+// Produk (ProductController) - 1 baris = 7 route CRUD
+Route::resource('products', ProductController::class);
+
+// Keranjang & checkout (dari Tugas 10)
 Route::get('/cart', [OrderController::class, 'cart']);
 Route::get('/checkout', [OrderController::class, 'checkout']);

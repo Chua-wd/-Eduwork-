@@ -19,6 +19,8 @@
         <a href="/products">Produk</a>
         <a href="/cart">Keranjang</a>
         <a href="/checkout">Checkout</a>
+        <a href="/about">Tentang</a>
+        <a href="/contact">Kontak</a>
     </nav>
 
     @yield('content')
