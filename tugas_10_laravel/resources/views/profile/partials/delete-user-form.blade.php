@@ -1,24 +1,24 @@
 {{--
-    Versi Breeze memakai modal Alpine.js. Proyek ini tidak memakai Alpine/npm,
-    jadi konfirmasinya memakai <details> (buka-tutup bawaan HTML, tanpa JavaScript).
+    Breeze uses an Alpine.js modal here. This project doesn't use Alpine/npm,
+    so the confirmation uses <details> (native HTML open/close, no JavaScript).
 --}}
 <section>
     <header>
-        <h2>Hapus akun</h2>
+        <h2>Delete account</h2>
         <p class="intro">
-            Setelah akun dihapus, semua datanya akan hilang permanen.
-            Simpan dulu data yang masih kamu perlukan.
+            Once your account is deleted, all of its data is permanently removed.
+            Download anything you want to keep first.
         </p>
     </header>
 
     <details @if ($errors->userDeletion->isNotEmpty()) open @endif>
-        <summary class="btn btn-danger btn-sm">Hapus akun</summary>
+        <summary class="btn btn-danger btn-sm">Delete account</summary>
 
         <form method="post" action="{{ route('profile.destroy') }}" style="margin-top: 16px;">
             @csrf
             @method('delete')
 
-            <p style="margin: 0 0 12px;">Yakin ingin menghapus akunmu? Masukkan password untuk konfirmasi.</p>
+            <p style="margin: 0 0 12px;">Are you sure you want to delete your account? Enter your password to confirm.</p>
 
             <div class="field" style="max-width: 360px;">
                 <x-input-label for="password" value="Password" />
@@ -26,7 +26,7 @@
                 <x-input-error :messages="$errors->userDeletion->get('password')" />
             </div>
 
-            <x-danger-button>Ya, hapus akun saya</x-danger-button>
+            <x-danger-button>Yes, delete my account</x-danger-button>
         </form>
     </details>
 </section>

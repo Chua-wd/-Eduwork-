@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $selectedCategory ? $selectedCategory->name : 'Belanja')
+@section('title', $selectedCategory ? $selectedCategory->name : 'Shop')
 
 @section('content')
     @php
-        // Helper link: pertahankan filter kategori/urutan yang sedang aktif
+        // Link helpers: keep the active category / sort order when switching the other
         $categoryId = $selectedCategory?->id;
         $sortLink = fn ($value) => route('products.index', array_filter(['category' => $categoryId, 'sort' => $value === 'new' ? null : $value]));
         $catLink = fn ($id) => route('products.index', array_filter(['category' => $id, 'sort' => $sort === 'new' ? null : $sort]));
@@ -16,23 +16,23 @@
 
     <div style="display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap;">
         <div>
-            <p class="eyebrow">( {{ $products->total() }} produk )</p>
-            <h1 class="display display-lg">{{ $selectedCategory ? $selectedCategory->name : 'Semua produk' }}</h1>
+            <p class="eyebrow">( {{ $products->total() }} {{ \Illuminate\Support\Str::plural('product', $products->total()) }} )</p>
+            <h1 class="display display-lg">{{ $selectedCategory ? $selectedCategory->name : 'All products' }}</h1>
         </div>
         @auth
-            <a href="{{ route('products.create') }}" class="btn btn-ghost btn-sm">+ Tambah produk</a>
+            <a href="{{ route('dashboard.products.create') }}" class="btn btn-ghost btn-sm">+ Add product</a>
         @endauth
     </div>
 
-    {{-- Toolbar: urutan (kiri) + kategori dari ProductCategory (kanan) --}}
+    {{-- Toolbar: sort order (left) + categories from ProductCategory (right) --}}
     <div class="toolbar">
         <div class="tabs">
-            <a href="{{ $sortLink('new') }}" class="{{ $sort === 'new' ? 'active' : '' }}">Terbaru</a>
-            <a href="{{ $sortLink('price_asc') }}" class="{{ $sort === 'price_asc' ? 'active' : '' }}">Harga terendah</a>
-            <a href="{{ $sortLink('price_desc') }}" class="{{ $sort === 'price_desc' ? 'active' : '' }}">Harga tertinggi</a>
+            <a href="{{ $sortLink('new') }}" class="{{ $sort === 'new' ? 'active' : '' }}">Newest</a>
+            <a href="{{ $sortLink('price_asc') }}" class="{{ $sort === 'price_asc' ? 'active' : '' }}">Price: low to high</a>
+            <a href="{{ $sortLink('price_desc') }}" class="{{ $sort === 'price_desc' ? 'active' : '' }}">Price: high to low</a>
         </div>
         <div class="cat-links">
-            <a href="{{ $catLink(null) }}" class="{{ $categoryId ? '' : 'active' }}">Semua</a>
+            <a href="{{ $catLink(null) }}" class="{{ $categoryId ? '' : 'active' }}">All</a>
             @foreach ($categories as $category)
                 <a href="{{ $catLink($category->id) }}" class="{{ $categoryId === $category->id ? 'active' : '' }}">
                     {{ $category->name }} <span class="muted">{{ $category->products_count }}</span>
@@ -47,22 +47,22 @@
         @empty
             <p class="muted">
                 @if ($products->total() > 0)
-                    Tidak ada produk di halaman ini.
-                    <a href="{{ $products->url(1) }}">Kembali ke halaman 1</a>
+                    There are no products on this page.
+                    <a href="{{ $products->url(1) }}">Back to page 1</a>
                 @else
-                    Belum ada produk.
+                    No products yet.
                 @endif
             </p>
         @endforelse
     </div>
 
-    {{-- Pagination: link halaman 1, 2, 3 ... dibuat otomatis oleh Laravel --}}
+    {{-- Pagination: Laravel builds the 1, 2, 3 ... links automatically --}}
     {{ $products->links() }}
 
     @if ($products->isNotEmpty())
         <p class="page-info">
-            Menampilkan {{ $products->firstItem() }}–{{ $products->lastItem() }}
-            dari {{ $products->total() }} produk · halaman {{ $products->currentPage() }} dari {{ $products->lastPage() }}
+            Showing {{ $products->firstItem() }}–{{ $products->lastItem() }}
+            of {{ $products->total() }} products · page {{ $products->currentPage() }} of {{ $products->lastPage() }}
         </p>
     @endif
 @endsection

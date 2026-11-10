@@ -1,12 +1,18 @@
 {{--
-    Komponen gambar produk (SVG), dipakai lewat:
+    Product image component:
         <x-product-visual :product="$product" />
-        <x-product-visual :product="$product" view="back" />    (sisi belakang)
-        <x-product-visual :product="$product" view="detail" />  (close-up label)
-    Bentuk kemasan dipilih otomatis dari nama produk: tube, jar, dropper, atau can.
+        <x-product-visual :product="$product" view="back" />    (back of the pack)
+        <x-product-visual :product="$product" view="detail" />  (close-up)
+    - If the product has an uploaded image (products.image), that photo is shown.
+    - Otherwise an SVG illustration of the packaging is drawn; the shape is picked
+      from the product name: tube, jar, dropper or can.
 --}}
-@props(['product', 'view' => 'front', 'tone' => 'light'])  {{-- tone="dark" untuk latar gelap --}}
+@props(['product', 'view' => 'front', 'tone' => 'light'])  {{-- tone="dark" for dark backgrounds --}}
 
+@if ($product->image)
+    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" loading="lazy"
+         {{ $attributes->merge(['style' => 'width: 100%; height: 100%; object-fit: cover;' . ($view === 'detail' ? ' transform: scale(1.7);' : '')]) }}>
+@else
 @php
     $name = strtolower($product->name);
 
@@ -121,11 +127,11 @@
     <rect x="{{ $geo['lx'] }}" y="{{ $geo['ly'] }}" width="{{ $geo['lw'] }}" height="{{ $geo['lh'] }}" rx="4" fill="{{ $c['label'] }}"/>
     <g fill="{{ $c['text'] }}" font-family="Inter, system-ui, sans-serif" text-anchor="middle">
         @if ($view === 'back')
-            <text x="{{ $cx }}" y="{{ $geo['ly'] + 22 }}" font-size="9" font-weight="600" letter-spacing="2">CARA PAKAI</text>
+            <text x="{{ $cx }}" y="{{ $geo['ly'] + 22 }}" font-size="9" font-weight="600" letter-spacing="2">HOW TO USE</text>
             @for ($i = 0; $i < 5; $i++)
                 <rect x="{{ $geo['lx'] + 12 }}" y="{{ $geo['ly'] + 36 + $i * 13 }}" width="{{ $geo['lw'] - 24 - ($i % 2) * 18 }}" height="4" rx="2" fill="{{ $c['text'] }}" fill-opacity=".25"/>
             @endfor
-            <text x="{{ $cx }}" y="{{ $geo['ly'] + $geo['lh'] - 14 }}" font-size="8" fill-opacity=".7">Untuk pria · semua jenis kulit</text>
+            <text x="{{ $cx }}" y="{{ $geo['ly'] + $geo['lh'] - 14 }}" font-size="8" fill-opacity=".7">For men · all skin types</text>
         @else
             <text x="{{ $cx }}" y="{{ $geo['ly'] + 30 }}" font-size="13" font-weight="600" letter-spacing="3.5">NAVIR</text>
             <line x1="{{ $cx - 14 }}" y1="{{ $geo['ly'] + 40 }}" x2="{{ $cx + 14 }}" y2="{{ $geo['ly'] + 40 }}" stroke="{{ $c['text'] }}" stroke-opacity=".4"/>
@@ -135,3 +141,4 @@
         @endif
     </g>
 </svg>
+@endif

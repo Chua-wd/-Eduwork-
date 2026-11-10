@@ -1,7 +1,7 @@
 <section>
     <header>
-        <h2>Informasi profil</h2>
-        <p class="intro">Perbarui nama dan alamat email akunmu.</p>
+        <h2>Profile information</h2>
+        <p class="intro">Update your account's name and email address.</p>
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -14,7 +14,7 @@
 
         <div class="row-2">
             <div class="field">
-                <x-input-label for="name" value="Nama" />
+                <x-input-label for="name" value="Name" />
                 <x-text-input id="name" name="name" type="text" :value="old('name', $user->name)" required autofocus autocomplete="name" />
                 <x-input-error :messages="$errors->get('name')" />
             </div>
@@ -28,20 +28,20 @@
 
         @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
             <p class="muted" style="font-size: 13px;">
-                Email kamu belum terverifikasi.
-                <button form="send-verification" class="btn btn-ghost btn-sm">Kirim ulang email verifikasi</button>
+                Your email address is unverified.
+                <button form="send-verification" class="btn btn-ghost btn-sm">Resend verification email</button>
             </p>
 
             @if (session('status') === 'verification-link-sent')
-                <p class="saved">Link verifikasi baru sudah dikirim ke emailmu.</p>
+                <p class="saved">A new verification link has been sent to your email address.</p>
             @endif
         @endif
 
         <div style="display: flex; align-items: center; gap: 14px;">
-            <x-primary-button>Simpan</x-primary-button>
+            <x-primary-button>Save</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p class="saved">Tersimpan.</p>
+                <p class="saved">Saved.</p>
             @endif
         </div>
     </form>

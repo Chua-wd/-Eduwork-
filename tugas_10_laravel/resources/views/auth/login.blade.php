@@ -1,8 +1,8 @@
 <x-guest-layout>
-    <x-slot name="title">Masuk</x-slot>
+    <x-slot name="title">Log in</x-slot>
 
-    <p class="eyebrow">( masuk )</p>
-    <h2 class="display display-lg" style="margin-bottom: 24px;">Selamat datang kembali.</h2>
+    <p class="eyebrow">( log in )</p>
+    <h2 class="display display-lg" style="margin-bottom: 24px;">Welcome back.</h2>
 
     <!-- Session Status -->
     <x-auth-session-status :status="session('status')" />
@@ -28,18 +28,18 @@
             <!-- Remember Me -->
             <label for="remember_me" class="check">
                 <input id="remember_me" type="checkbox" name="remember">
-                Ingat saya
+                Remember me
             </label>
 
             @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}">Lupa password?</a>
+                <a href="{{ route('password.request') }}">Forgot password?</a>
             @endif
         </div>
 
-        <x-primary-button class="btn-block">Masuk</x-primary-button>
+        <x-primary-button class="btn-block">Log in</x-primary-button>
     </form>
 
     <p class="auth-links" style="justify-content: center;">
-        <span class="muted">Belum punya akun? <a href="{{ route('register') }}" style="color: var(--ink);">Daftar</a></span>
+        <span class="muted">Don't have an account? <a href="{{ route('register') }}" style="color: var(--ink);">Sign up</a></span>
     </p>
 </x-guest-layout>

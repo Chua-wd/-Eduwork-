@@ -9,48 +9,48 @@ use Illuminate\Database\Seeder;
 class ProductSeeder extends Seeder
 {
     /**
-     * Isi tabel products dengan data dummy, dikelompokkan per kategori.
-     * Jalankan CategorySeeder lebih dulu (lihat DatabaseSeeder).
+     * Fill the products table with dummy data, grouped by category.
+     * Run CategorySeeder first (see DatabaseSeeder).
      */
     public function run(): void
     {
-        // Nama produk menyertakan ukuran (ml/g); ukuran ini ikut tampil di label kemasan.
+        // Product names include the size (ml/g); the size is also printed on the drawn packaging.
         $products = [
-            'Pembersih Wajah' => [
+            'Cleansers' => [
                 ['name' => 'Charcoal Deep Face Wash 100ml', 'price' => 89000, 'stock' => 40,
-                 'description' => 'Sabun wajah arang aktif yang mengangkat minyak dan kotoran tanpa membuat kulit kering.'],
+                 'description' => 'Activated charcoal face wash that lifts oil and dirt without drying out your skin.'],
                 ['name' => 'Oil Control Gel Cleanser 150ml', 'price' => 99000, 'stock' => 32,
-                 'description' => 'Gel pembersih dengan salicylic acid untuk kulit berminyak dan berjerawat.'],
+                 'description' => 'Gel cleanser with salicylic acid for oily and breakout-prone skin.'],
             ],
-            'Pelembap' => [
+            'Moisturizers' => [
                 ['name' => 'Daily Hydra Moisturizer 50ml', 'price' => 129000, 'stock' => 28,
-                 'description' => 'Pelembap ringan berbahan hyaluronic acid. Cepat meresap dan tidak lengket.'],
+                 'description' => 'Lightweight moisturizer with hyaluronic acid. Absorbs fast and never feels sticky.'],
                 ['name' => 'Matte Finish Moisturizer 50ml', 'price' => 139000, 'stock' => 20,
-                 'description' => 'Melembapkan sekaligus mengontrol kilap sepanjang hari, hasil akhir matte.'],
+                 'description' => 'Hydrates while keeping shine under control all day, with a matte finish.'],
             ],
-            'Serum' => [
+            'Serums' => [
                 ['name' => 'Niacinamide 10% Serum 30ml', 'price' => 159000, 'stock' => 35,
-                 'description' => 'Serum niacinamide 10% untuk menyamarkan pori, meratakan warna kulit, dan mengurangi minyak berlebih.'],
+                 'description' => '10% niacinamide serum that minimizes pores, evens out skin tone and reduces excess oil.'],
                 ['name' => 'Vitamin C Bright Serum 30ml', 'price' => 169000, 'stock' => 24,
-                 'description' => 'Vitamin C stabil untuk kulit lebih cerah dan perlindungan dari radikal bebas.'],
-                ['name' => 'Cooling Under-Eye Serum 15ml', 'price' => 119000, 'stock' => 18,
-                 'description' => 'Serum mata dengan kafein dan efek dingin untuk mata lelah dan kantung mata.'],
+                 'description' => 'Stable vitamin C for brighter skin and protection against free radicals.'],
+                ['name' => 'Cooling Under-Eye Serum 15ml', 'price' => 119000, 'stock' => 8,
+                 'description' => 'Caffeine eye serum with a cooling tip for tired eyes and puffiness.'],
             ],
-            'Tabir Surya' => [
+            'Sunscreen' => [
                 ['name' => 'Sport Sunscreen SPF 50 50ml', 'price' => 109000, 'stock' => 45,
-                 'description' => 'Tabir surya SPF 50 PA++++, tahan keringat, tanpa white cast. Cocok untuk aktivitas luar ruangan.'],
+                 'description' => 'SPF 50 PA++++ sunscreen that is sweat-resistant with no white cast. Made for outdoor days.'],
             ],
-            'Cukur & Jenggot' => [
+            'Shave & Beard' => [
                 ['name' => 'Cedar Beard Oil 30ml', 'price' => 119000, 'stock' => 22,
-                 'description' => 'Minyak jenggot aroma cedarwood yang melembutkan rambut jenggot dan menenangkan kulit di bawahnya.'],
+                 'description' => 'Cedarwood-scented beard oil that softens beard hair and soothes the skin underneath.'],
                 ['name' => 'Sensitive Shaving Foam 200ml', 'price' => 79000, 'stock' => 30,
-                 'description' => 'Busa cukur dengan aloe vera untuk cukuran halus tanpa iritasi.'],
+                 'description' => 'Shaving foam with aloe vera for a smooth shave without irritation.'],
             ],
-            'Perawatan Tubuh' => [
+            'Body Care' => [
                 ['name' => 'Marine Body Wash 250ml', 'price' => 89000, 'stock' => 38,
-                 'description' => 'Sabun mandi aroma laut yang segar, membersihkan tanpa membuat kulit kering.'],
+                 'description' => 'Fresh ocean-scented body wash that cleans without drying out your skin.'],
                 ['name' => 'Fresh Deodorant Stick 50g', 'price' => 69000, 'stock' => 50,
-                 'description' => 'Deodoran tanpa alkohol, perlindungan bau hingga 48 jam.'],
+                 'description' => 'Alcohol-free deodorant with up to 48 hours of odor protection.'],
             ],
         ];
 
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
             $category = ProductCategory::where('name', $categoryName)->firstOrFail();
 
             foreach ($items as $item) {
-                // updateOrCreate: cari berdasarkan nama, buat baru atau perbarui datanya
+                // updateOrCreate: find by name, then create it or update its data
                 Product::updateOrCreate(
                     ['name' => $item['name']],
                     $item + ['category_id' => $category->id]

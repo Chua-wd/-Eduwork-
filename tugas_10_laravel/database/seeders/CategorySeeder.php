@@ -8,15 +8,15 @@ use Illuminate\Database\Seeder;
 class CategorySeeder extends Seeder
 {
     /**
-     * Isi tabel categories dengan data awal.
+     * Fill the categories table with starter data.
      */
     public function run(): void
     {
-        // Kategori toko perawatan kulit pria "Navir"
-        $categories = ['Pembersih Wajah', 'Pelembap', 'Serum', 'Tabir Surya', 'Cukur & Jenggot', 'Perawatan Tubuh'];
+        // Categories of the "Navir" men's skincare shop
+        $categories = ['Cleansers', 'Moisturizers', 'Serums', 'Sunscreen', 'Shave & Beard', 'Body Care'];
 
         foreach ($categories as $name) {
-            // firstOrCreate: buat jika belum ada, jadi aman dijalankan berulang kali
+            // firstOrCreate: only creates it if it doesn't exist yet, so it's safe to run again
             ProductCategory::firstOrCreate(['name' => $name]);
         }
     }

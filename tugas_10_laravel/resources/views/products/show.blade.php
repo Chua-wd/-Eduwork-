@@ -7,7 +7,7 @@
         preg_match('/(\d+)\s?(ml|g)\b/i', $product->name, $m);
         $size = $m ? $m[1] . ' ' . strtolower($m[2]) : null;
         $title = trim(preg_replace('/\s*\d+\s?(ml|g)\b/i', '', $product->name));
-        $views = ['front' => 'Depan', 'back' => 'Belakang', 'detail' => 'Detail'];
+        $views = ['front' => 'Front', 'back' => 'Back', 'detail' => 'Close-up'];
     @endphp
 
     @if (session('success'))
@@ -15,11 +15,11 @@
     @endif
 
     <section class="split" style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start;">
-        {{-- Kiri: galeri --}}
+        {{-- Left: gallery --}}
         <div class="visual" style="position: relative; aspect-ratio: auto; height: min(78vh, 760px);">
             <div style="position: absolute; top: 14px; left: 14px; z-index: 2; display: flex; gap: 8px;">
                 @foreach ($views as $key => $label)
-                    <button type="button" class="thumb {{ $loop->first ? 'active' : '' }}" data-view="{{ $key }}" aria-label="{{ $label }}"
+                    <button type="button" class="thumb {{ $loop->first ? 'active' : '' }}" data-view="{{ $key }}" aria-label="{{ $label }}" title="{{ $label }}"
                             style="width: 64px; height: 44px; padding: 0; border-radius: 6px; cursor: pointer; overflow: hidden;
                                    background: var(--bg); border: 1px solid {{ $loop->first ? 'var(--navy)' : 'transparent' }};">
                         <x-product-visual :product="$product" :view="$key" style="width: 100%; height: 100%;" preserveAspectRatio="xMidYMid slice" />
@@ -34,9 +34,9 @@
             @endforeach
         </div>
 
-        {{-- Kanan: info produk --}}
+        {{-- Right: product info --}}
         <div style="display: flex; flex-direction: column; min-height: min(78vh, 760px);">
-            <p class="eyebrow">Navir · {{ $product->category?->name ?? 'Tanpa kategori' }}</p>
+            <p class="eyebrow">Navir · {{ $product->category?->name ?? 'Uncategorized' }}</p>
             <h1 class="display display-lg">{{ $title }}@if ($size)<br>{{ $size }}@endif</h1>
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
@@ -44,53 +44,54 @@
                     @if ($size)
                         <span class="chip active">{{ strtoupper($size) }}</span>
                     @endif
-                    <span class="chip">{{ $product->stock > 0 ? 'Stok ' . $product->stock : 'Stok habis' }}</span>
+                    <span class="chip">{{ $product->stock > 0 ? $product->stock . ' in stock' : 'Out of stock' }}</span>
                 </div>
             </div>
 
             <hr class="rule">
 
-            <p class="eyebrow">( info produk )</p>
+            <p class="eyebrow">( product info )</p>
             <p class="lead" style="margin: 6px 0 0;">{{ $product->description }}</p>
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px;">
-                <div class="display display-md">Rp {{ number_format($product->price, 0, ',', '.') }}</div>
-                <a href="/checkout" class="btn">Beli sekarang</a>
+                <div class="display display-md">Rp {{ number_format($product->price) }}</div>
+                <a href="/checkout" class="btn">Buy now</a>
             </div>
 
             <div class="accordion" style="margin-top: auto; padding-top: 28px;">
                 <details>
-                    <summary>Ringkasan produk</summary>
+                    <summary>Product overview</summary>
                     <div class="content">{{ $product->description }}</div>
                 </details>
                 <details>
-                    <summary>Spesifikasi</summary>
+                    <summary>Specifications</summary>
                     <div class="content">
                         <dl class="spec">
-                            <dt>Kategori</dt><dd>{{ $product->category?->name ?? '-' }}</dd>
-                            <dt>Ukuran</dt><dd>{{ $size ?? '-' }}</dd>
-                            <dt>Stok</dt><dd>{{ $product->stock }}</dd>
-                            <dt>Kode produk</dt><dd>NVR-{{ str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</dd>
+                            <dt>Category</dt><dd>{{ $product->category?->name ?? '–' }}</dd>
+                            <dt>Size</dt><dd>{{ $size ?? '–' }}</dd>
+                            <dt>Stock</dt><dd>{{ $product->stock }}</dd>
+                            <dt>SKU</dt><dd>NVR-{{ str_pad($product->id, 4, '0', STR_PAD_LEFT) }}</dd>
                         </dl>
                     </div>
                 </details>
                 <details>
-                    <summary>Pengiriman &amp; pengembalian</summary>
+                    <summary>Delivery &amp; returns</summary>
                     <div class="content">
-                        Dikirim 1–2 hari kerja. Gratis ongkir untuk pembelian di atas Rp 200.000.
-                        Produk yang belum dibuka dapat dikembalikan dalam 7 hari.
+                        Ships within 1–2 business days. Free shipping on orders over Rp 200,000.
+                        Unopened products can be returned within 7 days.
                     </div>
                 </details>
             </div>
 
-            {{-- Aksi admin (CRUD dari tugas sebelumnya) - hanya untuk pengguna yang login --}}
+            {{-- Admin actions (dashboard), only for logged-in users --}}
             @auth
                 <div style="display: flex; gap: 8px; margin-top: 16px;">
-                    <a href="{{ route('products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
-                    <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Yakin hapus produk ini?')">
+                    <a href="{{ route('dashboard.products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
+                    <form action="{{ route('dashboard.products.destroy', $product) }}" method="POST"
+                          onsubmit="return confirm('Delete “{{ $product->name }}”? This cannot be undone.')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </div>
             @endauth
@@ -99,7 +100,7 @@
 
     @if ($related->isNotEmpty())
         <section style="margin-top: 56px;">
-            <h2 class="display display-lg" style="margin-bottom: 18px;">Produk serupa</h2>
+            <h2 class="display display-lg" style="margin-bottom: 18px;">You may also like</h2>
             <div class="grid">
                 @foreach ($related as $item)
                     <x-product-card :product="$item" />
@@ -109,7 +110,7 @@
     @endif
 
     <script>
-        // Klik thumbnail -> tampilkan gambar besar yang sesuai
+        // Click a thumbnail -> show the matching large image
         document.querySelectorAll('.thumb').forEach(function (thumb) {
             thumb.addEventListener('click', function () {
                 document.querySelectorAll('.thumb').forEach(function (t) { t.style.borderColor = 'transparent'; });

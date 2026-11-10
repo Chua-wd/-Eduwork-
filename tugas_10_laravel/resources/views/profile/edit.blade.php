@@ -1,9 +1,10 @@
 <x-app-layout>
-    <x-slot name="title">Profil</x-slot>
+    <x-slot name="title">Profile</x-slot>
 
     <x-slot name="header">
-        <p class="eyebrow">( profil )</p>
-        <h1 class="display display-lg">Pengaturan akun</h1>
+        <p class="eyebrow">( profile )</p>
+        <h1 class="display display-lg">Account settings</h1>
+        <x-dashboard-nav />
     </x-slot>
 
     <div style="max-width: 760px;">

@@ -1,18 +1,18 @@
 {{--
-    Layout untuk halaman tamu dari Breeze (login, daftar, lupa password, dll).
-    Dipakai lewat <x-guest-layout> ... </x-guest-layout>.
-    Kiri: panel navy bergaya hero beranda. Kanan: form.
+    Layout for Breeze guest pages (log in, sign up, forgot password, ...).
+    Used via <x-guest-layout> ... </x-guest-layout>.
+    Left: navy panel in the style of the home hero. Right: the form.
 --}}
 @php
     $featured = \App\Models\Product::where('name', 'like', '%Serum%')->first();
 @endphp
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Akun' }} · Navir Men's Skincare</title>
+    <title>{{ $title ?? 'Account' }} · Navir Men's Skincare</title>
 
     @include('layouts.partials.styles')
 </head>
@@ -31,11 +31,11 @@
             @endif
 
             <div style="position: relative;">
-                <h1 class="display">Rutinitas pria,<br>tanpa ribet.</h1>
+                <h1 class="display">A men's routine,<br>made simple.</h1>
                 <ul>
-                    <li>Diuji dermatologis</li>
-                    <li>3 langkah</li>
-                    <li>Cocok iklim tropis</li>
+                    <li>Dermatologist tested</li>
+                    <li>3-step routine</li>
+                    <li>Made for humid climates</li>
                 </ul>
             </div>
         </aside>

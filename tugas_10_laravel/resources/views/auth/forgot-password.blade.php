@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <x-slot name="title">Lupa password</x-slot>
+    <x-slot name="title">Forgot password</x-slot>
 
-    <p class="eyebrow">( lupa password )</p>
-    <h2 class="display display-lg">Atur ulang password.</h2>
+    <p class="eyebrow">( forgot password )</p>
+    <h2 class="display display-lg">Reset your password.</h2>
     <p class="muted" style="margin: 8px 0 24px;">
-        Masukkan email akunmu. Kami akan mengirim link untuk membuat password baru.
+        Enter your account email and we'll send you a link to choose a new password.
     </p>
 
     <!-- Session Status -->
@@ -20,10 +20,10 @@
             <x-input-error :messages="$errors->get('email')" />
         </div>
 
-        <x-primary-button class="btn-block">Kirim link reset password</x-primary-button>
+        <x-primary-button class="btn-block">Email reset link</x-primary-button>
     </form>
 
     <p class="auth-links" style="justify-content: center;">
-        <a href="{{ route('login') }}">&larr; Kembali ke halaman masuk</a>
+        <a href="{{ route('login') }}">&larr; Back to log in</a>
     </p>
 </x-guest-layout>

@@ -1,10 +1,10 @@
 <x-guest-layout>
-    <x-slot name="title">Konfirmasi password</x-slot>
+    <x-slot name="title">Confirm password</x-slot>
 
-    <p class="eyebrow">( area aman )</p>
-    <h2 class="display display-lg">Konfirmasi password.</h2>
+    <p class="eyebrow">( secure area )</p>
+    <h2 class="display display-lg">Confirm your password.</h2>
     <p class="muted" style="margin: 8px 0 24px;">
-        Ini area yang dilindungi. Masukkan password kamu sekali lagi untuk melanjutkan.
+        This is a secure area. Please enter your password again to continue.
     </p>
 
     <form method="POST" action="{{ route('password.confirm') }}">
@@ -17,6 +17,6 @@
             <x-input-error :messages="$errors->get('password')" />
         </div>
 
-        <x-primary-button class="btn-block">Konfirmasi</x-primary-button>
+        <x-primary-button class="btn-block">Confirm</x-primary-button>
     </form>
 </x-guest-layout>

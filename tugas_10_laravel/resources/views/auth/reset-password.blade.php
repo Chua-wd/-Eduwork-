@@ -1,8 +1,8 @@
 <x-guest-layout>
-    <x-slot name="title">Password baru</x-slot>
+    <x-slot name="title">New password</x-slot>
 
-    <p class="eyebrow">( password baru )</p>
-    <h2 class="display display-lg" style="margin-bottom: 24px;">Buat password baru.</h2>
+    <p class="eyebrow">( new password )</p>
+    <h2 class="display display-lg" style="margin-bottom: 24px;">Choose a new password.</h2>
 
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
@@ -19,18 +19,18 @@
 
         <!-- Password -->
         <div class="field">
-            <x-input-label for="password" value="Password baru" />
+            <x-input-label for="password" value="New password" />
             <x-text-input id="password" type="password" name="password" required autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" />
         </div>
 
         <!-- Confirm Password -->
         <div class="field">
-            <x-input-label for="password_confirmation" value="Ulangi password baru" />
+            <x-input-label for="password_confirmation" value="Confirm new password" />
             <x-text-input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" />
         </div>
 
-        <x-primary-button class="btn-block">Simpan password baru</x-primary-button>
+        <x-primary-button class="btn-block">Save new password</x-primary-button>
     </form>
 </x-guest-layout>

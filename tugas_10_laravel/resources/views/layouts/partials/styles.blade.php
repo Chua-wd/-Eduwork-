@@ -111,6 +111,22 @@
         .table th, .table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; }
         .table th { font-weight: 500; color: var(--muted); font-size: 12px; }
 
+        /* ===== Dashboard tables ===== */
+        .table td { vertical-align: middle; }
+        .table tr:last-child td { border-bottom: 0; }
+        .table tbody tr:hover td { background: #f7f9fc; }
+        .table .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .table .name { font-family: var(--serif); font-size: 19px; line-height: 1.15; }
+        .table .desc { color: var(--muted); max-width: 320px; }
+        .thumb-cell { width: 76px; }
+        .thumb-cell .visual { width: 56px; height: 70px; aspect-ratio: auto; border-radius: 6px; }
+        .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+        .row-actions form { margin: 0; }
+        .table-wrap { overflow-x: auto; border-radius: var(--radius); }
+        .page-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 4px; }
+        .image-field { display: flex; gap: 16px; align-items: flex-start; }
+        .image-field .visual { width: 96px; height: 120px; aspect-ratio: auto; flex: none; border-radius: 8px; }
+
         /* ===== Pagination ===== */
         .pagination { display: flex; justify-content: center; gap: 6px; list-style: none; padding: 0; margin: 36px 0 8px; }
         .pagination .page-link { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px;
