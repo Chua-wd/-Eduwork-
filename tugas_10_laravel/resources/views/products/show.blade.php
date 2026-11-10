@@ -83,15 +83,17 @@
                 </details>
             </div>
 
-            {{-- Aksi admin (CRUD dari tugas sebelumnya) --}}
-            <div style="display: flex; gap: 8px; margin-top: 16px;">
-                <a href="{{ route('products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
-                <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Yakin hapus produk ini?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                </form>
-            </div>
+            {{-- Aksi admin (CRUD dari tugas sebelumnya) - hanya untuk pengguna yang login --}}
+            @auth
+                <div style="display: flex; gap: 8px; margin-top: 16px;">
+                    <a href="{{ route('products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
+                    <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Yakin hapus produk ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
+                </div>
+            @endauth
         </div>
     </section>
 

@@ -19,7 +19,9 @@
             <p class="eyebrow">( {{ $products->total() }} produk )</p>
             <h1 class="display display-lg">{{ $selectedCategory ? $selectedCategory->name : 'Semua produk' }}</h1>
         </div>
-        <a href="{{ route('products.create') }}" class="btn btn-ghost btn-sm">+ Tambah produk</a>
+        @auth
+            <a href="{{ route('products.create') }}" class="btn btn-ghost btn-sm">+ Tambah produk</a>
+        @endauth
     </div>
 
     {{-- Toolbar: urutan (kiri) + kategori dari ProductCategory (kanan) --}}
