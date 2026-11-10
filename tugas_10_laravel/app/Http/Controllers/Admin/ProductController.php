@@ -30,10 +30,17 @@ class ProductController extends Controller
         ];
     }
 
-    // GET /dashboard/products : product table, 10 per page
-    public function index()
+    // GET /dashboard/products            : product table, 10 per page
+    // GET /dashboard/products?q=serum     : search by name (sidebar search box)
+    // GET /dashboard/products?stock=low   : only products with less than 10 in stock
+    public function index(Request $request)
     {
-        $products = Product::with('category')->latest('id')->paginate(10);
+        $products = Product::with('category')
+            ->when($request->filled('q'), fn ($query) => $query->where('name', 'like', '%' . $request->q . '%'))
+            ->when($request->stock === 'low', fn ($query) => $query->where('stock', '<', 10))
+            ->latest('id')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('dashboard.products.index', compact('products'));
     }

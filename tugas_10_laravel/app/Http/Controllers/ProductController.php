@@ -53,6 +53,9 @@ class ProductController extends Controller
     // GET /products/{product} : product detail page
     public function show(Product $product)
     {
+        // Count this visit as a "product click" for the dashboard
+        $product->clicks()->create(['user_id' => auth()->id()]);
+
         $product->load('category');
 
         // "You may also like": other products in the same category (through the relation)

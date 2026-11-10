@@ -1,10 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="title">Add product</x-slot>
 
     <x-slot name="header">
         <p class="eyebrow">( dashboard )</p>
         <h1 class="display display-lg">Add product</h1>
-        <x-dashboard-nav />
     </x-slot>
 
     {{-- enctype is required for file uploads --}}
@@ -17,4 +16,4 @@
             <a href="{{ route('dashboard.products.index') }}" class="btn btn-ghost">Cancel</a>
         </div>
     </form>
-</x-app-layout>
+</x-admin-layout>

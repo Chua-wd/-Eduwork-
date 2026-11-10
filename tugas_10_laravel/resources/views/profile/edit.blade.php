@@ -1,10 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="title">Profile</x-slot>
 
     <x-slot name="header">
         <p class="eyebrow">( profile )</p>
         <h1 class="display display-lg">Account settings</h1>
-        <x-dashboard-nav />
     </x-slot>
 
     <div style="max-width: 760px;">
@@ -20,4 +19,4 @@
             @include('profile.partials.delete-user-form')
         </div>
     </div>
-</x-app-layout>
+</x-admin-layout>

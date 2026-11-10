@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
@@ -22,10 +23,8 @@ Route::get('/checkout', [OrderController::class, 'checkout']);
 
 // ===== Dashboard (logged-in users only) =====
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Overview page
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Overview page: KPIs, charts and lists (?range=7|30|90)
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // /dashboard/products and /dashboard/categories
     // Route names: dashboard.products.index, dashboard.categories.edit, ...

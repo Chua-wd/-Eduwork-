@@ -15,16 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Pengguna contoh untuk testing (password: "password")
+        // Test account (password: "password")
         User::firstOrCreate(
             ['email' => 'test@example.com'],
             ['name' => 'Test User', 'password' => 'password']
         );
 
-        // Urutan penting: kategori dulu, baru produk (produk butuh category_id)
+        // Order matters: categories, then products (need category_id),
+        // then dashboard data (clicks & orders need products)
         $this->call([
             CategorySeeder::class,
             ProductSeeder::class,
+            DashboardSeeder::class,
         ]);
     }
 }

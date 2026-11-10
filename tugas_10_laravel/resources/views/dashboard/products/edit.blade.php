@@ -1,10 +1,9 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="title">Edit product</x-slot>
 
     <x-slot name="header">
         <p class="eyebrow">( dashboard )</p>
         <h1 class="display display-lg">Edit product</h1>
-        <x-dashboard-nav />
     </x-slot>
 
     <form action="{{ route('dashboard.products.update', $product) }}" method="POST" enctype="multipart/form-data" class="form-card">
@@ -18,4 +17,4 @@
             <a href="{{ route('products.show', $product) }}" class="btn btn-ghost" style="margin-left: auto;">View in shop &#8599;</a>
         </div>
     </form>
-</x-app-layout>
+</x-admin-layout>

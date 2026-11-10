@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="title">Products</x-slot>
 
     <x-slot name="header">
@@ -9,11 +9,24 @@
             </div>
             <a href="{{ route('dashboard.products.create') }}" class="btn">+ Add product</a>
         </div>
-        <x-dashboard-nav />
     </x-slot>
 
     @if (session('success'))
         <div class="alert">{{ session('success') }}</div>
+    @endif
+
+    {{-- Active filters from the sidebar (search / low stock) --}}
+    @if (request()->filled('q') || request('stock') === 'low')
+        <div class="chips" style="margin-bottom: 14px; align-items: center;">
+            <span class="muted" style="font-size: 13px;">{{ $products->total() }} {{ \Illuminate\Support\Str::plural('result', $products->total()) }} for</span>
+            @if (request()->filled('q'))
+                <span class="chip active">“{{ request('q') }}”</span>
+            @endif
+            @if (request('stock') === 'low')
+                <span class="chip active">Low stock (under 10)</span>
+            @endif
+            <a href="{{ route('dashboard.products.index') }}" class="chip">Clear &times;</a>
+        </div>
     @endif
 
     <div class="table-wrap">
@@ -71,4 +84,4 @@
             Showing {{ $products->firstItem() }}–{{ $products->lastItem() }} of {{ $products->total() }} products
         </p>
     @endif
-</x-app-layout>
+</x-admin-layout>

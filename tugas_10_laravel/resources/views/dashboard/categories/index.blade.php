@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-admin-layout>
     <x-slot name="title">Product Categories</x-slot>
 
     <x-slot name="header">
@@ -9,7 +9,6 @@
             </div>
             <a href="{{ route('dashboard.categories.create') }}" class="btn">+ Add category</a>
         </div>
-        <x-dashboard-nav />
     </x-slot>
 
     @if (session('success'))
@@ -57,4 +56,4 @@
             </tbody>
         </table>
     </div>
-</x-app-layout>
+</x-admin-layout>
