@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // Aturan validasi yang sama untuk tambah & edit
+    private array $rules = [
+        'category_id' => 'nullable|exists:categories,id',
+        'name'        => 'required|max:255',
+        'description' => 'nullable',
+        'price'       => 'required|integer|min:0',
+        'stock'       => 'required|integer|min:0',
+    ];
+
     // GET /products : daftar produk
     public function index()
     {
-        $products = Product::latest()->get();
+        // with('category') = ambil kategori sekaligus (1 query, bukan 1 query per produk)
+        $products = Product::with('category')->latest('id')->get();
 
         return view('products.index', compact('products'));
     }
@@ -18,18 +29,15 @@ class ProductController extends Controller
     // GET /products/create : form tambah produk
     public function create()
     {
-        return view('products.create');
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.create', compact('categories'));
     }
 
     // POST /products : simpan produk baru
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name'        => 'required|max:255',
-            'description' => 'nullable',
-            'price'       => 'required|integer|min:0',
-            'stock'       => 'required|integer|min:0',
-        ]);
+        $data = $request->validate($this->rules);
 
         Product::create($data);
 
@@ -45,18 +53,15 @@ class ProductController extends Controller
     // GET /products/{product}/edit : form edit produk
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.edit', compact('product', 'categories'));
     }
 
     // PUT /products/{product} : simpan perubahan
     public function update(Request $request, Product $product)
     {
-        $data = $request->validate([
-            'name'        => 'required|max:255',
-            'description' => 'nullable',
-            'price'       => 'required|integer|min:0',
-            'stock'       => 'required|integer|min:0',
-        ]);
+        $data = $request->validate($this->rules);
 
         $product->update($data);
 

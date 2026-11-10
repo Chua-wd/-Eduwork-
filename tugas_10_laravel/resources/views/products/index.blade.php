@@ -15,6 +15,7 @@
         <tr>
             <th>ID</th>
             <th>Nama</th>
+            <th>Kategori</th>
             <th>Harga</th>
             <th>Stok</th>
             <th>Aksi</th>
@@ -23,6 +24,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td><a href="{{ route('products.show', $product) }}">{{ $product->name }}</a></td>
+                <td>{{ $product->category?->name ?? '-' }}</td>
                 <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                 <td>{{ $product->stock }}</td>
                 <td>
@@ -37,7 +39,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="5">Belum ada produk.</td>
+                <td colspan="6">Belum ada produk.</td>
             </tr>
         @endforelse
     </table>

@@ -10,6 +10,7 @@
     <div class="grid">
         @forelse ($products as $product)
             <div class="card">
+                <small>{{ $product->category?->name ?? 'Tanpa kategori' }}</small>
                 <h3>{{ $product->name }}</h3>
                 <p>{{ $product->description }}</p>
                 <p class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>

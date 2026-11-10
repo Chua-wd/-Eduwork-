@@ -9,7 +9,7 @@ class PageController extends Controller
     // Halaman utama: tampilkan 3 produk terbaru
     public function home()
     {
-        $products = Product::latest()->take(3)->get();
+        $products = Product::with('category')->latest('id')->take(3)->get();
 
         return view('pages.home', compact('products'));
     }
