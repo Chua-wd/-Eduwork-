@@ -3,8 +3,6 @@
 @section('title', 'Keranjang')
 
 @section('content')
-    <h1>Keranjang Belanja</h1>
-
     @php
         // Keranjang disimpan di session (per pengunjung).
         // Fitur "tambah ke keranjang" akan dibuat di tugas berikutnya.
@@ -12,8 +10,11 @@
         $total = 0;
     @endphp
 
+    <p class="eyebrow">( keranjang )</p>
+    <h1 class="display display-lg" style="margin-bottom: 20px;">Keranjang belanja</h1>
+
     @if (count($cart) > 0)
-        <table>
+        <table class="table">
             <tr>
                 <th>Produk</th>
                 <th>Harga</th>
@@ -34,9 +35,14 @@
                 <th>Rp {{ number_format($total, 0, ',', '.') }}</th>
             </tr>
         </table>
-        <p><a href="/checkout">Lanjut ke Checkout &rarr;</a></p>
+        <div style="margin-top: 20px; text-align: right;">
+            <a href="/checkout" class="btn">Lanjut ke checkout</a>
+        </div>
     @else
-        <p>Keranjang masih kosong.</p>
-        <a href="/products">Belanja sekarang &rarr;</a>
+        <div class="pill" style="padding: 48px 24px; text-align: center;">
+            <div class="display display-md">Keranjangmu masih kosong.</div>
+            <p class="muted">Mulai dari pembersih wajah, langkah pertama rutinitas harianmu.</p>
+            <a href="/products" class="btn" style="margin-top: 8px;">Belanja sekarang</a>
+        </div>
     @endif
 @endsection

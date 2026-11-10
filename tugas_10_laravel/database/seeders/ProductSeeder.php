@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -14,33 +14,48 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        // Nama produk menyertakan ukuran (ml/g); ukuran ini ikut tampil di label kemasan.
         $products = [
-            'Elektronik' => [
-                ['name' => 'Laptop A',            'description' => 'Laptop 14 inch, RAM 16GB, SSD 512GB', 'price' => 8500000, 'stock' => 10],
-                ['name' => 'HP Samsung',          'description' => 'Smartphone layar AMOLED 6.5 inch',    'price' => 3500000, 'stock' => 15],
-                ['name' => 'Earbuds Wireless',    'description' => 'Bluetooth 5.3 dengan noise cancelling', 'price' => 450000, 'stock' => 30],
+            'Pembersih Wajah' => [
+                ['name' => 'Charcoal Deep Face Wash 100ml', 'price' => 89000, 'stock' => 40,
+                 'description' => 'Sabun wajah arang aktif yang mengangkat minyak dan kotoran tanpa membuat kulit kering.'],
+                ['name' => 'Oil Control Gel Cleanser 150ml', 'price' => 99000, 'stock' => 32,
+                 'description' => 'Gel pembersih dengan salicylic acid untuk kulit berminyak dan berjerawat.'],
             ],
-            'Buku' => [
-                ['name' => 'Belajar MySQL Dasar', 'description' => 'Panduan database MySQL untuk pemula', 'price' => 95000,  'stock' => 25],
-                ['name' => 'Laravel untuk Pemula', 'description' => 'Membangun web dengan framework Laravel', 'price' => 120000, 'stock' => 20],
-                ['name' => 'Clean Code',          'description' => 'Menulis kode yang rapi dan mudah dirawat', 'price' => 150000, 'stock' => 12],
+            'Pelembap' => [
+                ['name' => 'Daily Hydra Moisturizer 50ml', 'price' => 129000, 'stock' => 28,
+                 'description' => 'Pelembap ringan berbahan hyaluronic acid. Cepat meresap dan tidak lengket.'],
+                ['name' => 'Matte Finish Moisturizer 50ml', 'price' => 139000, 'stock' => 20,
+                 'description' => 'Melembapkan sekaligus mengontrol kilap sepanjang hari, hasil akhir matte.'],
             ],
-            'Fashion' => [
-                ['name' => 'Kaos Polos Hitam',    'description' => 'Katun combed 30s, ukuran M-XL',       'price' => 75000,  'stock' => 50],
-                ['name' => 'Jaket Hoodie',        'description' => 'Bahan fleece tebal dan hangat',       'price' => 210000, 'stock' => 18],
+            'Serum' => [
+                ['name' => 'Niacinamide 10% Serum 30ml', 'price' => 159000, 'stock' => 35,
+                 'description' => 'Serum niacinamide 10% untuk menyamarkan pori, meratakan warna kulit, dan mengurangi minyak berlebih.'],
+                ['name' => 'Vitamin C Bright Serum 30ml', 'price' => 169000, 'stock' => 24,
+                 'description' => 'Vitamin C stabil untuk kulit lebih cerah dan perlindungan dari radikal bebas.'],
+                ['name' => 'Cooling Under-Eye Serum 15ml', 'price' => 119000, 'stock' => 18,
+                 'description' => 'Serum mata dengan kafein dan efek dingin untuk mata lelah dan kantung mata.'],
             ],
-            'Aksesoris Komputer' => [
-                ['name' => 'Keyboard Mechanical', 'description' => 'Switch blue dengan lampu RGB',        'price' => 450000, 'stock' => 25],
-                ['name' => 'Mouse Wireless',      'description' => 'Mouse 2.4GHz hemat baterai',          'price' => 180000, 'stock' => 40],
+            'Tabir Surya' => [
+                ['name' => 'Sport Sunscreen SPF 50 50ml', 'price' => 109000, 'stock' => 45,
+                 'description' => 'Tabir surya SPF 50 PA++++, tahan keringat, tanpa white cast. Cocok untuk aktivitas luar ruangan.'],
             ],
-            'Peralatan Rumah' => [
-                ['name' => 'Rice Cooker 1.8L',    'description' => 'Penanak nasi dengan fitur penghangat', 'price' => 350000, 'stock' => 8],
-                ['name' => 'Kipas Angin Berdiri', 'description' => '3 tingkat kecepatan, 16 inch',        'price' => 275000, 'stock' => 6],
+            'Cukur & Jenggot' => [
+                ['name' => 'Cedar Beard Oil 30ml', 'price' => 119000, 'stock' => 22,
+                 'description' => 'Minyak jenggot aroma cedarwood yang melembutkan rambut jenggot dan menenangkan kulit di bawahnya.'],
+                ['name' => 'Sensitive Shaving Foam 200ml', 'price' => 79000, 'stock' => 30,
+                 'description' => 'Busa cukur dengan aloe vera untuk cukuran halus tanpa iritasi.'],
+            ],
+            'Perawatan Tubuh' => [
+                ['name' => 'Marine Body Wash 250ml', 'price' => 89000, 'stock' => 38,
+                 'description' => 'Sabun mandi aroma laut yang segar, membersihkan tanpa membuat kulit kering.'],
+                ['name' => 'Fresh Deodorant Stick 50g', 'price' => 69000, 'stock' => 50,
+                 'description' => 'Deodoran tanpa alkohol, perlindungan bau hingga 48 jam.'],
             ],
         ];
 
         foreach ($products as $categoryName => $items) {
-            $category = Category::where('name', $categoryName)->firstOrFail();
+            $category = ProductCategory::where('name', $categoryName)->firstOrFail();
 
             foreach ($items as $item) {
                 // updateOrCreate: cari berdasarkan nama, buat baru atau perbarui datanya

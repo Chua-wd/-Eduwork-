@@ -3,32 +3,23 @@
 @section('title', 'Edit Produk')
 
 @section('content')
-    <h1>Edit Produk</h1>
+    <p class="eyebrow">( kelola produk )</p>
+    <h1 class="display display-lg" style="margin-bottom: 20px;">Edit produk</h1>
 
-    @if ($errors->any())
-        <ul style="color: red;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    <div class="split" style="display: grid; grid-template-columns: 640px 1fr; gap: 20px; align-items: start;">
+        <form action="{{ route('products.update', $product) }}" method="POST" class="form-card">
+            @csrf
+            @method('PUT')
+            @include('products._form', ['product' => $product])
 
-    <form action="{{ route('products.update', $product) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <p>Kategori:<br>
-            <select name="category_id">
-                <option value="">-- Pilih kategori --</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @selected(old('category_id', $product->category_id) == $category->id)>{{ $category->name }}</option>
-                @endforeach
-            </select>
-        </p>
-        <p>Nama:<br><input type="text" name="name" value="{{ old('name', $product->name) }}"></p>
-        <p>Deskripsi:<br><textarea name="description">{{ old('description', $product->description) }}</textarea></p>
-        <p>Harga:<br><input type="number" name="price" value="{{ old('price', $product->price) }}"></p>
-        <p>Stok:<br><input type="number" name="stock" value="{{ old('stock', $product->stock) }}"></p>
-        <button type="submit">Update</button>
-        <a href="{{ route('products.index') }}">Batal</a>
-    </form>
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button type="submit" class="btn">Simpan perubahan</button>
+                <a href="{{ route('products.show', $product) }}" class="btn btn-ghost">Batal</a>
+            </div>
+        </form>
+
+        <div class="visual" style="max-width: 360px;">
+            <x-product-visual :product="$product" />
+        </div>
+    </div>
 @endsection

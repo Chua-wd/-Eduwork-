@@ -9,9 +9,10 @@ class Product extends Model
 {
     protected $fillable = ['category_id', 'name', 'description', 'image', 'price', 'stock'];
 
-    // Setiap produk milik satu kategori
+    // Relasi kebalikannya: setiap produk milik satu kategori (inverse one-to-many).
+    // Dipakai di Blade sebagai $product->category->name
     public function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -12,11 +12,12 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['Elektronik', 'Buku', 'Fashion', 'Aksesoris Komputer', 'Peralatan Rumah'];
+        // Kategori toko perawatan kulit pria "Navir"
+        $categories = ['Pembersih Wajah', 'Pelembap', 'Serum', 'Tabir Surya', 'Cukur & Jenggot', 'Perawatan Tubuh'];
 
         foreach ($categories as $name) {
             // firstOrCreate: buat jika belum ada, jadi aman dijalankan berulang kali
-            Category::firstOrCreate(['name' => $name]);
+            ProductCategory::firstOrCreate(['name' => $name]);
         }
     }
 }
