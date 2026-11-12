@@ -181,6 +181,11 @@
                 background: radial-gradient(ellipse 70% 60% at 50% 38%, #2f6189 0%, #173a5a 45%, #0b1f33 100%); }
         .hero-grain { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
         .hero-product { position: absolute; left: 50%; top: 9vh; transform: translateX(-50%); width: min(560px, 80vw); height: 66vh; }
+        /* Hero photo has a near-black studio background: fade its edges into the navy hero
+           so it reads as part of the scene instead of a dark rectangle. */
+        .hero-product img { display: block; width: 100%; height: 100%; object-fit: contain;
+                            -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+                                    mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%); }
         .hero-product svg { width: 100%; height: 100%; }
         .hero-title { position: relative; text-align: center; margin: 0 16px 22px;
                       font-family: var(--serif); font-weight: 400; line-height: .95; letter-spacing: -.02em;

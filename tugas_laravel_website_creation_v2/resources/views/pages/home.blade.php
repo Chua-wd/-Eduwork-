@@ -13,11 +13,14 @@
             <rect width="100%" height="100%" filter="url(#grain)"/>
         </svg>
 
-        @if ($featured)
-            <div class="hero-product">
-                <x-product-visual :product="$featured" tone="dark" />
-            </div>
+        {{-- Hero photo (Niacinamide 10% Serum). Source: public/uploads/products/demo/landing page.png,
+             converted to WebP. First thing on screen, so it loads right away (no lazy loading). --}}
+        <div class="hero-product">
+            <img src="{{ asset('images/landing-hero.webp') }}" width="1024" height="1536" fetchpriority="high"
+                 alt="NAVIR Niacinamide 10% Serum dropper bottle surrounded by water drops">
+        </div>
 
+        @if ($featured)
             {{-- floating product card --}}
             <a href="{{ route('products.show', $featured) }}" class="promo">
                 <div class="eyebrow">( featured )</div>
