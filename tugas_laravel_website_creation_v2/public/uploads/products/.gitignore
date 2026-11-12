@@ -1,0 +1,6 @@
+*
+!.gitignore
+# Demo product photos for the 13 seeded products (made with Gemini), kept in git for the portfolio.
+# Photos uploaded later through the dashboard stay out of git.
+!demo/
+!demo/*
