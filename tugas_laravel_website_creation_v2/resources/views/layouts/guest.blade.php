@@ -19,7 +19,7 @@
 <body>
     <div class="auth">
         <aside class="auth-side">
-            <a href="/" class="brand">
+            <a href="{{ url('/') }}" class="brand">
                 <x-application-logo class="brand-mark" />
                 NAVIR
             </a>

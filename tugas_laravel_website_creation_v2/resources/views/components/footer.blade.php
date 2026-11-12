@@ -3,9 +3,9 @@
     <div class="container">
         <span>&copy; {{ date('Y') }} Navir Men's Skincare · Built with Laravel</span>
         <nav>
-            <a href="/products">Shop</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="{{ url('/products') }}">Shop</a>
+            <a href="{{ url('/about') }}">About</a>
+            <a href="{{ url('/contact') }}">Contact</a>
         </nav>
     </div>
 </footer>

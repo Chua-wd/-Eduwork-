@@ -38,7 +38,7 @@
                     <span>Dermatologist tested &reg;</span>
                     <span>&#9675;&#9675;&#9675; 3-step routine</span>
                     <span>Made for humid climates</span>
-                    <a href="/products" class="glass-btn">Shop now</a>
+                    <a href="{{ url('/products') }}" class="glass-btn">Shop now</a>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
     <section style="margin-top: 40px;">
         <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 18px;">
             <h2 class="display display-lg">New arrivals</h2>
-            <a href="/products" class="muted" style="font-size: 13px;">View all &rarr;</a>
+            <a href="{{ url('/products') }}" class="muted" style="font-size: 13px;">View all &rarr;</a>
         </div>
         <div class="grid">
             @forelse ($products as $product)

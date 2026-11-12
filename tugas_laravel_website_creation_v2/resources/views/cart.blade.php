@@ -36,13 +36,13 @@
             </tr>
         </table>
         <div style="margin-top: 20px; text-align: right;">
-            <a href="/checkout" class="btn">Continue to checkout</a>
+            <a href="{{ url('/checkout') }}" class="btn">Continue to checkout</a>
         </div>
     @else
         <div class="pill" style="padding: 48px 24px; text-align: center;">
             <div class="display display-md">Your cart is empty.</div>
             <p class="muted">Start with a cleanser, step one of your daily routine.</p>
-            <a href="/products" class="btn" style="margin-top: 8px;">Shop now</a>
+            <a href="{{ url('/products') }}" class="btn" style="margin-top: 8px;">Shop now</a>
         </div>
     @endif
 @endsection

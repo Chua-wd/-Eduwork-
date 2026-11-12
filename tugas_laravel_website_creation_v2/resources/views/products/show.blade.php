@@ -55,7 +55,7 @@
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px;">
                 <div class="display display-md">Rp {{ number_format($product->price) }}</div>
-                <a href="/checkout" class="btn">Buy now</a>
+                <a href="{{ url('/checkout') }}" class="btn">Buy now</a>
             </div>
 
             <div class="accordion" style="margin-top: auto; padding-top: 28px;">

@@ -6,19 +6,19 @@
 <header class="site-header">
     <nav class="container nav">
         <div class="nav-group">
-            <a href="/" class="brand">
+            <a href="{{ url('/') }}" class="brand">
                 <x-application-logo class="brand-mark" />
                 NAVIR
             </a>
             <span class="nav-links" style="display: flex; gap: 2px;">
-                <a href="/products" class="{{ request()->is('products*') ? 'active' : '' }}">Shop</a>
-                <a href="/about" class="{{ request()->is('about') ? 'active' : '' }}">About</a>
-                <a href="/contact" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+                <a href="{{ url('/products') }}" class="{{ request()->is('products*') ? 'active' : '' }}">Shop</a>
+                <a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">About</a>
+                <a href="{{ url('/contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Contact</a>
             </span>
         </div>
 
         <div class="nav-group">
-            <a href="/cart" class="{{ request()->is('cart') ? 'active' : '' }}">
+            <a href="{{ url('/cart') }}" class="{{ request()->is('cart') ? 'active' : '' }}">
                 Cart <span class="count">{{ $cartCount }}</span>
             </a>
 

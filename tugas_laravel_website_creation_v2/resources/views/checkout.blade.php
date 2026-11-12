@@ -28,7 +28,7 @@
                 <span class="display display-md">Total</span>
                 <span class="display display-md">Rp 0</span>
             </div>
-            <a href="/products" class="btn btn-ghost" style="width: 100%; margin-top: 16px;">Continue shopping</a>
+            <a href="{{ url('/products') }}" class="btn btn-ghost" style="width: 100%; margin-top: 16px;">Continue shopping</a>
         </div>
     </div>
 @endsection
