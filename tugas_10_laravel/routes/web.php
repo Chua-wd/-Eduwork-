@@ -29,9 +29,14 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // /dashboard/products and /dashboard/categories
     // Route names: dashboard.products.index, dashboard.categories.edit, ...
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::resource('products', AdminProductController::class)->except('show');
-        Route::resource('categories', AdminCategoryController::class)->except('show');
+        Route::resource('products', AdminProductController::class)->except(['show', 'store']);
+        Route::resource('categories', AdminCategoryController::class)->except(['show', 'store']);
     });
+
+    // Save new product / category (POST). Kept outside the "dashboard." name prefix
+    // so the route names are exactly product.store and product-category.store
+    Route::post('/dashboard/products', [AdminProductController::class, 'store'])->name('product.store');
+    Route::post('/dashboard/categories', [AdminCategoryController::class, 'store'])->name('product-category.store');
 });
 
 // Profile (Laravel Breeze)

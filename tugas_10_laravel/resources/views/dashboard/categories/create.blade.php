@@ -6,7 +6,7 @@
         <h1 class="display display-lg">Add category</h1>
     </x-slot>
 
-    <form action="{{ route('dashboard.categories.store') }}" method="POST" class="form-card" style="max-width: 480px;">
+    <form action="{{ route('product-category.store') }}" method="POST" class="form-card" style="max-width: 480px;">
         @csrf
         @include('dashboard.categories._form')
 

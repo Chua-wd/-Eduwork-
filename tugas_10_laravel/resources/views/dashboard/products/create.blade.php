@@ -7,7 +7,7 @@
     </x-slot>
 
     {{-- enctype is required for file uploads --}}
-    <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data" class="form-card">
+        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" class="form-card">
         @csrf
         @include('dashboard.products._form')
 
