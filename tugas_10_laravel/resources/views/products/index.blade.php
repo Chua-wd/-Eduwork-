@@ -19,9 +19,9 @@
             <p class="eyebrow">( {{ $products->total() }} {{ \Illuminate\Support\Str::plural('product', $products->total()) }} )</p>
             <h1 class="display display-lg">{{ $selectedCategory ? $selectedCategory->name : 'All products' }}</h1>
         </div>
-        @auth
+        @if (auth()->user()?->isAdmin())
             <a href="{{ route('dashboard.products.create') }}" class="btn btn-ghost btn-sm">+ Add product</a>
-        @endauth
+        @endif
     </div>
 
     {{-- Toolbar: sort order (left) + categories from ProductCategory (right) --}}

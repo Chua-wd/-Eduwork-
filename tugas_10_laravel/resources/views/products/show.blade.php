@@ -84,7 +84,7 @@
             </div>
 
             {{-- Admin actions (dashboard), only for logged-in users --}}
-            @auth
+             @if (auth()->user()?->isAdmin())
                 <div style="display: flex; gap: 8px; margin-top: 16px;">
                     <a href="{{ route('dashboard.products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
                     <form action="{{ route('dashboard.products.destroy', $product) }}" method="POST"
@@ -94,7 +94,7 @@
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </div>
-            @endauth
+            @endif
         </div>
     </section>
 

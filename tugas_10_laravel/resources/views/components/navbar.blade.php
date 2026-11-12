@@ -24,9 +24,15 @@
 
             {{-- Login state (Laravel Breeze) --}}
             @auth
-                <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard*', 'profile') ? 'active' : '' }}">
-                    Dashboard · {{ \Illuminate\Support\Str::of(Auth::user()->name)->before(' ') }}
-                </a>
+                                @if (Auth::user()->isAdmin())
+                    <a href="{{ route('dashboard') }}" class="{{ request()->is('dashboard*') ? 'active' : '' }}">
+                        Dashboard · {{ \Illuminate\Support\Str::of(Auth::user()->name)->before(' ') }}
+                    </a>
+                @else
+                    <a href="{{ route('profile.edit') }}" class="{{ request()->is('profile') ? 'active' : '' }}">
+                        Profile · {{ \Illuminate\Support\Str::of(Auth::user()->name)->before(' ') }}
+                    </a>
+                @endif
                 <form method="POST" action="{{ route('logout') }}" style="display: contents;">
                     @csrf
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">Log out</a>

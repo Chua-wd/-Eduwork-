@@ -22,7 +22,7 @@ Route::get('/cart', [OrderController::class, 'cart']);
 Route::get('/checkout', [OrderController::class, 'checkout']);
 
 // ===== Dashboard (logged-in users only) =====
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     // Overview page: KPIs, charts and lists (?range=7|30|90)
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
