@@ -87,12 +87,14 @@
              @if (auth()->user()?->isAdmin())
                 <div style="display: flex; gap: 8px; margin-top: 16px;">
                     <a href="{{ route('dashboard.products.edit', $product) }}" class="btn btn-ghost btn-sm">Edit</a>
-                    <form action="{{ route('dashboard.products.destroy', $product) }}" method="POST"
-                          onsubmit="return confirm('Delete “{{ $product->name }}”? This cannot be undone.')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    <details class="confirm-delete">
+                        <summary class="btn btn-danger btn-sm">Delete</summary>
+                        <form action="{{ route('dashboard.products.destroy', $product) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+                        </form>
+                    </details>
                 </div>
             @endif
         </div>

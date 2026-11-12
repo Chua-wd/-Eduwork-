@@ -323,7 +323,8 @@
         .pill-status.processing, .pill-status.shipped { background: var(--blue-soft); }
         .pill-status.processing::before { background: var(--chart-1); }
         .pill-status.shipped::before { background: var(--navy); }
-
+        
+        .confirm-delete { display: inline-flex; gap: 6px; align-items: center; } .confirm-delete[open] summary { display: none; }
         /* ===== Responsif ===== */
         @media (max-width: 900px) {
             .grid { grid-template-columns: repeat(2, 1fr); }

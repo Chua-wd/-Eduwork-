@@ -39,12 +39,14 @@
                         <td>
                             <div class="row-actions">
                                 <a href="{{ route('dashboard.categories.edit', $category) }}" class="btn btn-ghost btn-sm">Edit</a>
-                                <form action="{{ route('dashboard.categories.destroy', $category) }}" method="POST"
-                                      onsubmit="return confirm('Delete the “{{ $category->name }}” category?{{ $category->products_count ? ' Its ' . $category->products_count . ' product(s) will become uncategorized.' : '' }}')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                                <details class="confirm-delete">
+                                    <summary class="btn btn-danger btn-sm">Delete</summary>
+                                    <form action="{{ route('dashboard.categories.destroy', $category) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+                                    </form>
+                                </details>
                             </div>
                         </td>
                     </tr>
