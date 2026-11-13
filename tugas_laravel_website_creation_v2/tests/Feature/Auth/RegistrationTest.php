@@ -26,6 +26,7 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        // Customers go back to the shop; only admins are sent to the dashboard
+        $response->assertRedirect('/');
     }
 }

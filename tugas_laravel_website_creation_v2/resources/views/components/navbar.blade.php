@@ -1,6 +1,6 @@
 {{-- Navbar component: used on every page via <x-navbar /> --}}
 @php
-    $cartCount = collect(session('cart', []))->sum('quantity');
+    $cartCount = \App\Support\Cart::count();
 @endphp
 
 <header class="site-header">

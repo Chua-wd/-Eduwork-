@@ -13,8 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,               // admin + system admin
+            'system_admin' => \App\Http\Middleware\SystemAdminMiddleware::class, // system admin only
         ]);
+
+        // Already logged in and opening /login or /register: admins go to the dashboard,
+        // users to the shop (Laravel's default is /dashboard, which users can't open: 403)
+        $middleware->redirectUsersTo(fn (Request $request) => $request->user()?->isAdmin() ? route('dashboard') : url('/'));
     })
         ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

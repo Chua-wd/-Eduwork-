@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/');
+        // Back to where they were going (e.g. checkout), otherwise the home page
+        return redirect()->intended('/');
     }
 }

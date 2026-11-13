@@ -18,6 +18,9 @@
         'up'       => '<path d="M7 17 17 7M8 7h9v9"/>',
         'down'     => '<path d="M7 7l10 10M17 8v9H8"/>',
         'check'    => '<path d="m5 12 5 5 9-10"/>',
+        'users'    => '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6.5 6.5 0 0 1 3.5 6"/>',
+        'trash'    => '<path d="M4 7h16M10 11v6M14 11v6"/><path d="M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+        'info'     => '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     ];
 @endphp
 

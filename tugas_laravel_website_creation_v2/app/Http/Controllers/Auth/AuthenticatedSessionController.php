@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -27,6 +28,12 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        // Laravel sends people back to the page they tried to open before logging in.
+        // If a customer had tried an admin page (/dashboard...), skip it: they'd only get "403".
+        if (! $request->user()->isAdmin() && Str::is(url('dashboard') . '*', $request->session()->get('url.intended', ''))) {
+            $request->session()->forget('url.intended');
+        }
 
         return redirect()->intended($request->user()->isAdmin() ? route('dashboard') : '/');
     }

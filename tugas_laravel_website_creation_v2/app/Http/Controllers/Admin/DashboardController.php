@@ -78,7 +78,7 @@ class DashboardController extends Controller
             ->join('products', 'products.id', '=', 'product_clicks.product_id')
             ->leftJoin('categories', 'categories.id', '=', 'products.category_id')
             ->selectRaw("COALESCE(categories.name, 'Uncategorized') AS name, COUNT(*) AS total")
-            ->groupBy('name')->orderByDesc('total')->get();
+            ->groupBy('categories.name')->orderByDesc('total')->get();
 
         // ===== Most-clicked products =====
         $topProducts = Product::with('category')

@@ -8,10 +8,23 @@
         $size = $m ? $m[1] . ' ' . strtolower($m[2]) : null;
         $title = trim(preg_replace('/\s*\d+\s?(ml|g)\b/i', '', $product->name));
         $views = ['front' => 'Front', 'back' => 'Back', 'detail' => 'Close-up'];
+        $inCart = \App\Support\Cart::quantities()[$product->id] ?? 0;
     @endphp
 
     @if (session('success'))
         <div class="alert">{{ session('success') }}</div>
+    @endif
+
+    {{-- "Added to cart" popup after pressing Add to cart --}}
+    @if ($added = session('added'))
+        <div class="toast" role="status" id="added-toast">
+            <div class="visual"><x-product-visual :product="$product" /></div>
+            <div>
+                <div style="font-weight: 600; font-size: 13px;">Added to cart</div>
+                <div class="hint">{{ $added['name'] }} &times; {{ $added['quantity'] }}</div>
+            </div>
+            <a href="{{ route('cart.index') }}" class="btn btn-sm">View cart</a>
+        </div>
     @endif
 
     <section class="split" style="display: grid; grid-template-columns: 1.55fr 1fr; gap: 20px; align-items: start;">
@@ -53,10 +66,28 @@
             <p class="eyebrow">( product info )</p>
             <p class="lead" style="margin: 6px 0 0;">{{ $product->description }}</p>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 28px;">
-                <div class="display display-md">Rp {{ number_format($product->price) }}</div>
-                <a href="{{ url('/checkout') }}" class="btn">Buy now</a>
-            </div>
+            <div class="display display-md" style="margin-top: 28px;">Rp {{ number_format($product->price) }}</div>
+
+            {{-- Quantity + Add to cart --}}
+            @if ($product->stock > 0)
+                <form method="POST" action="{{ route('cart.store', $product) }}" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+                    @csrf
+                    <div class="qty">
+                        <button type="button" data-step="-1" aria-label="Less">−</button>
+                        <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ $product->stock }}" aria-label="Quantity">
+                        <button type="button" data-step="1" aria-label="More">+</button>
+                    </div>
+                    <button type="submit" class="btn" style="flex: 1;">Add to cart</button>
+                </form>
+                @if ($inCart)
+                    <p class="hint" style="margin-top: 8px;">{{ $inCart }} already in your <a href="{{ route('cart.index') }}">cart</a>.</p>
+                @endif
+            @else
+                <button type="button" class="btn" style="margin-top: 14px;" disabled>Out of stock</button>
+            @endif
+            @error('quantity')
+                <p class="hint" style="margin-top: 8px; color: #b42318;">{{ $message }}</p>
+            @enderror
 
             <div class="accordion" style="margin-top: auto; padding-top: 28px;">
                 <details>
@@ -112,6 +143,21 @@
     @endif
 
     <script>
+        // − / + next to the quantity box (stays between 1 and the stock)
+        document.querySelectorAll('[data-step]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var input = document.getElementById('quantity');
+                var next = (parseInt(input.value, 10) || 1) + parseInt(button.dataset.step, 10);
+                input.value = Math.min(Math.max(next, 1), parseInt(input.max, 10));
+            });
+        });
+
+        // Hide the "Added to cart" popup after a few seconds
+        var toast = document.getElementById('added-toast');
+        if (toast) {
+            setTimeout(function () { toast.remove(); }, 5000);
+        }
+
         // Click a thumbnail -> show the matching large image
         document.querySelectorAll('.thumb').forEach(function (thumb) {
             thumb.addEventListener('click', function () {
